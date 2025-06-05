@@ -15,17 +15,15 @@ const Navigation = () => {
     { name: "Team", href: "#team" },
     { name: "Contact", href: "#location" },
   ];
-
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 100);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  
   const scrollToSection = (href) => {
     const element = document.querySelector(href);
     if (element) {
@@ -42,17 +40,24 @@ const Navigation = () => {
       setIsMobileMenuOpen(false);
     }
   };
-
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-primary-900/95 backdrop-blur-md shadow-lg"
+          ? "bg-white/10 backdrop-blur-xl shadow-2xl border-b border-white/20"
           : "bg-transparent"
       }`}
+      style={{
+        backdropFilter: isScrolled ? "blur(20px) saturate(180%)" : "none",
+        WebkitBackdropFilter: isScrolled ? "blur(20px) saturate(180%)" : "none",
+        backgroundColor: isScrolled ? "rgba(26, 29, 32, 0.8)" : "transparent",
+        boxShadow: isScrolled
+          ? "0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+          : "none",
+      }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
