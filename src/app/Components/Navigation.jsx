@@ -23,7 +23,6 @@ const Navigation = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
   const scrollToSection = (href) => {
     const element = document.querySelector(href);
     if (element) {
@@ -31,9 +30,12 @@ const Navigation = () => {
       setIsMobileMenuOpen(false);
       // Add a small delay to allow menu to close, then scroll
       setTimeout(() => {
-        element.scrollIntoView({
+        const navbarHeight = window.innerWidth >= 1024 ? 80 : 64; // lg:h-20 or h-16
+        const offsetTop = element.offsetTop - navbarHeight;
+        
+        window.scrollTo({
+          top: offsetTop,
           behavior: "smooth",
-          block: "start",
         });
       }, 300);
     } else {
@@ -44,18 +46,20 @@ const Navigation = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      transition={{ duration: 0.6 }}      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-white/10 backdrop-blur-xl shadow-2xl border-b border-white/20"
+          ? "bg-white/5 backdrop-blur-2xl shadow-2xl border-b border-white/10"
           : "bg-transparent"
       }`}
       style={{
-        backdropFilter: isScrolled ? "blur(20px) saturate(180%)" : "none",
-        WebkitBackdropFilter: isScrolled ? "blur(20px) saturate(180%)" : "none",
-        backgroundColor: isScrolled ? "rgba(26, 29, 32, 0.8)" : "transparent",
+        backdropFilter: isScrolled ? "blur(24px) saturate(200%)" : "none",
+        WebkitBackdropFilter: isScrolled ? "blur(24px) saturate(200%)" : "none",
+        backgroundColor: isScrolled ? "rgba(15, 23, 42, 0.85)" : "transparent",
         boxShadow: isScrolled
-          ? "0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+          ? "0 8px 32px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+          : "none",
+        borderImage: isScrolled 
+          ? "linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05), rgba(255,255,255,0.1)) 1"
           : "none",
       }}
     >

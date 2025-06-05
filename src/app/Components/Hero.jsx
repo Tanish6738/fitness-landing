@@ -2,13 +2,12 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-const Hero = () => {
-  return (
-    <div className="relative min-h-screen bg-gradient-to-br from-primary-900 via-secondary-800 to-primary-950 text-white overflow-hidden">
+const Hero = () => {  return (
+    <div id="hero" className="relative min-h-screen bg-gradient-to-br from-primary-900 via-secondary-800 to-primary-950 text-white overflow-hidden">
       {/* Background overlay for depth */}
       <div className="absolute inset-0 bg-black/20"></div>
         {/* Content */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 lg:px-8">
+      <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-5rem)] px-6 lg:px-8 pt-16 lg:pt-20">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Headline */}
           <motion.h1
